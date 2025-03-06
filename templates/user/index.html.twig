@@ -35,7 +35,7 @@
                     <button>Удалить</button>
                 </form>
 
-                <form method="GET" action="{{ path('update_user', {"user": user.id}) }}">
+                <form method="GET" action="{{ path('edit_user', {"user": user.id}) }}">
                     <input type="hidden" name="_method" value="UPDATE">
                     <button>Изменить</button>
                 </form>

@@ -30,7 +30,7 @@ final class UserController extends AbstractController{
         return $this->redirect('/user');
     }
 
-    #[Route('/user/{user}', name: 'update_user', methods: ["PUT"])]
+    #[Route('/user/{user}/edit', name: 'update_user', methods: ["PUT"])]
     public function update(User  $user, Request $request, EntityManagerInterface $em): Response
     {
         $user->setFirstName($request->request->get('first_name'));
@@ -43,7 +43,7 @@ final class UserController extends AbstractController{
         return $this->redirect('/user');
     }
 
-    #[Route('/user/{user}', name: 'edit_user', methods: ["GET"])]
+    #[Route('/user/{user}/edit', name: 'edit_user', methods: ["GET"])]
     public function edit(User  $user): Response
     {
         return $this->render('/user/editUser.html.twig', ['user' => $user]);
@@ -65,7 +65,7 @@ final class UserController extends AbstractController{
         $em->persist($user);
         $em->flush();
 
-        return $this->redirect('/');
+        return $this->redirect('/user');
     }
 
     #[Route('/user/create')]
