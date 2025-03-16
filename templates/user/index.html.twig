@@ -16,6 +16,7 @@
         <th>Почта</th>
         <th>Телеграм</th>
         <th>Адрес</th>
+        <th>Отдел</th>
     </tr>
     </thead>
     <tbody>
@@ -28,6 +29,7 @@
             <td>{{ user.email }}</td>
             <td>{{ user.telegram }}</td>
             <td>{{ user.address}}</td>
+            <td>{{ user.department.name }}</td>
 
             <td>
                 <form method="POST" action="{{ path('delete_user', {"user": user.id}) }}">
@@ -47,6 +49,12 @@
 <hr/>
 <form method="GET" action="{{ path('index_user') }}">
     <input type="text" placeholder="поиск по имени или email" name="search">
+    <select name="department">
+        <option value="0">All</option>
+        {% for i in department %}
+            <option value="{{ i.id }}">{{ i.name }}</option>
+        {% endfor %}
+    </select>
     <input type="submit">
 </form>
 {% endblock %}
