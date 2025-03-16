@@ -12,6 +12,14 @@
     <input type="text" name="telegram" value="{{ user.telegram }}">
     <input type="text" name="email" value="{{ user.email }}">
     <input type="text" name="address" value="{{ user.address }}">
+    <select name="department">
+        {% for i in department %}
+            <option value="{{ i.id }}" {% if user.department.id == i.id %}
+            selected
+            {% endif %}
+            >{{ i.name }}</option>
+        {% endfor %}
+    </select>
     <input type="submit">
 </form>
 {% endblock %}

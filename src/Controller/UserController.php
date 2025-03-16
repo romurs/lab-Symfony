@@ -51,27 +51,35 @@ final class UserController extends AbstractController{
     }
 
     #[Route('/user/{user}/edit', name: 'update_user', methods: ["PUT"])]
-    public function update(User  $user, Request $request, EntityManagerInterface $em): Response
+    public function update(DepartmentRepository $departmentRepository, User  $user, Request $request, EntityManagerInterface $em): Response
     {
+        $departmentId = $request->request->get('department');
+
         $user->setFirstName($request->request->get('first_name'));
         $user->setLastName($request->request->get('last_name'));
         $user->setAge($request->request->get('age'));
         $user->setEmail($request->request->get('email'));
         $user->setTelegram($request->request->get('telegram'));
         $user->setAddress($request->request->get('address'));
+        $user->setDepartment($departmentRepository->find($departmentId));
         $em->flush();
         return $this->redirect('/user');
     }
 
     #[Route('/user/{user}/edit', name: 'edit_user', methods: ["GET"])]
-    public function edit(User  $user): Response
+    public function edit(DepartmentRepository $departmentRepository, User  $user): Response
     {
-        return $this->render('/user/editUser.html.twig', ['user' => $user]);
+        $qb = $departmentRepository->createQueryBuilder('u');
+        $department = $qb->getQuery()->getResult();
+        return $this->render('/user/editUser.html.twig', ['user' => $user, 'department' => $department]);
     }
 
     #[Route('/user', name: 'create_user', methods: ['POST'])]
-    public function create(EntityManagerInterface $em, Request $request ): Response
+    public function create(DepartmentRepository $departmentRepository, EntityManagerInterface $em, Request $request ): Response
     {
+        
+        $departmentId = $request->request->get('department');
+
         $user = new User();
         $user->setFirstName($request->request->get('first_name'));
         $user->setLastName($request->request->get('last_name'));
@@ -80,6 +88,7 @@ final class UserController extends AbstractController{
         $user->setTelegram($request->request->get('telegram'));
         $user->setEmail($request->request->get('email'));
         $user->setAddress($request->request->get('address'));
+        $user->setDepartment($departmentRepository->find($departmentId));
 
 
         $em->persist($user);
