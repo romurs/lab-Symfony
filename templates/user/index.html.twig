@@ -4,11 +4,17 @@
 
 {% block body %}
 <style>
+.user-icon {
+        width: 50px;  /* Размер картинки */
+        height: 50px;
+        object-fit: cover;  /* Обрезка картинки по размеру */
+    }
 </style>
 
 <table>
     <thead>
     <tr>
+        <th>Фото</th>
         <th>Имя</th>
         <th>Фамилия</th>
         <th>Возрас</th>
@@ -22,6 +28,13 @@
     <tbody>
     {% for user in users %}
         <tr>
+            <td>
+                {% if user.icon %}
+                    <img src="{{ asset('public' ~ user.iconPath) }}" class="user-icon">
+                {% else %}
+                    <img src="{{ asset('public/icon/default.png') }}" class="user-icon">
+                {% endif %}
+            </td>
             <td>{{ user.firstname }}</td>
             <td>{{ user.lastname }}</td>
             <td>{{ user.age }}</td>

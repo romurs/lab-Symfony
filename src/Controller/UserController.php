@@ -62,6 +62,15 @@ final class UserController extends AbstractController{
         $user->setTelegram($request->request->get('telegram'));
         $user->setAddress($request->request->get('address'));
         $user->setDepartment($departmentRepository->find($departmentId));
+
+        $image = $request->files->get("icon");
+        if ($image) {
+            $iconName = uniqid() . '.' . $image->guessExtension();
+            $image->move($this->getParameter('uploads_directory'), $iconName);
+
+            $user->setIcon($iconName);
+        }
+
         $em->flush();
         return $this->redirect('/user');
     }

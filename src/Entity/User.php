@@ -38,6 +38,9 @@ class User
     #[ORM\JoinColumn(nullable: false)]
     private ?Department $department = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $icon = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,18 @@ class User
     public function setDepartment(?Department $department): static
     {
         $this->department = $department;
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(string $icon): static
+    {
+        $this->icon = $icon;
 
         return $this;
     }
