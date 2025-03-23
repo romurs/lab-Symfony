@@ -3,7 +3,7 @@
 {% block title %}Hello ProductController!{% endblock %}
 
 {% block body %}
-    <form method="POST" action="{{ path('create_user') }}">
+    <form action="{{ path('create_user') }}" enctype="multipart/form-data" method="POST"> 
         <input name="first_name" class="firstname" type="text" placeholder="first_name">
         <input name="last_name" class="lastname" type="text" placeholder="last_name">
         <input name="age" class="age" type="text" placeholder="age">
@@ -16,6 +16,7 @@
                 <option value="{{ i.id }}">{{ i.name }}</option>
             {% endfor %}
         </select>
+        <input type="file" name="icon" class="icon" accept="image/jpg, image/png">
         <input type="submit">
     </form>
 {% endblock %}

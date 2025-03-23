@@ -11,7 +11,7 @@
 
 </style>
 
-<form action="{{path('update_user', {user: user.id})}}" method="POST">
+<form action="{{path('update_user', {user: user.id})}}" enctype="multipart/form-data" method="POST" >
     <div class="container">
         <input type= "hidden" name="_method" value="PUT">
         <input type="text" name="first_name" value="{{ user.firstname }}">

@@ -30,7 +30,7 @@
         <tr>
             <td>
                 {% if user.icon %}
-                    <img src="{{ asset('public' ~ user.iconPath) }}" class="user-icon">
+                    <img src="{{ asset('public/icon/' ~ user.icon) }}" class="user-icon">
                 {% else %}
                     <img src="{{ asset('public/icon/default.png') }}" class="user-icon">
                 {% endif %}
