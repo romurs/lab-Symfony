@@ -37,7 +37,7 @@ class CreateUserCommand extends Command
 
   protected function configure(): void
   {
-      $this->addArgument('first_name', InputArgument::REQUIRED, 'The username of the user.');
+      $this->addArgument('first_name', InputArgument::REQUIRED, 'The first name of the user.');
       $this->addArgument('last_name', InputArgument::REQUIRED, 'The username of the user.');
       $this->addArgument('age', InputArgument::REQUIRED, 'The username of the user.');
       $this->addArgument('status', InputArgument::REQUIRED, 'The username of the user.');
